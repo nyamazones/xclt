@@ -24,7 +24,7 @@ foreach ($sheet in $sheets -split "`r`n")
 
     [string] $sheetFilePath = $sheet -creplace '^.*?: (.*?)$', '$1'
 
-    [System.Text.RegularExpressions.Match[]] $mathces = (
+    [System.Text.RegularExpressions.Match[]] $matches = (
         Get-Content $sheetFilePath -Raw -Encoding UTF8 |
         Select-String '(?s)<worksheet.*?>.*?</worksheet>' `
             -CaseSensitive -AllMatches
@@ -35,7 +35,7 @@ foreach ($sheet in $sheets -split "`r`n")
         exit 1
     }
 
-    $mathces[0].Value
+    $matches[0].Value
     exit 0
 }
 
